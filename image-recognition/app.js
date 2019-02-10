@@ -6,13 +6,11 @@ app.get("/test", function(req, res){
     var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
     var visualRecognition = new VisualRecognitionV3({
         version: '2018-03-19',
-        iam_apikey: 'yBTV0Kd54On4MH7s8u4ecanbl_JT-mQ6NWyuKEpTZoNz'
+        iam_apikey: 'Nh1vfjJyrb44LEMnvvhiY6mPJtdbg1VPGkgVAWV_dDE3-mQ6NWyuKEpTZoNz'
     });
       
-    //var images_file = fs.createReadStream('./picture.jpg');
-    //var classifier_ids = ["food"];
     var params = {
-        url:"https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/apple/apple-iphone-x/silver/Apple-iPhoneX-Silver-1-3x.jpg"
+        url:"https://www.radiologyinfo.org/gallery-items/images/bone-xray-hands.jpg"
     };
 
     //asynchronous javascript call
@@ -22,15 +20,26 @@ app.get("/test", function(req, res){
         else{
             //Store response into a string
             var result = JSON.stringify(response, null, 2)
-            res.end(result)
+            //note that the return data is stored in response. 
+            //res.write(response.images.constructor.name +"\n")
+            //res.write(response.images[0].classifiers.constructor.name +"\n")
+            //res.end(response.images[0].classifiers[0].classes[0].score +"")
+            
+            //Get the array of the classes (category classification)
+            var class_col = response.images[0].classifiers[0].classes;
+            for(i = 0; i < class_col.length; i++) {
+                res.write(class_col[i].class + "\t");
+                res.write(class_col[i].score + "\n");
+            }
+            res.end("END")
             console.log(result)
         }
     });
 
 })
 
-var listener = app.listen(process.env.PORT,process.env.IP,function(){
-//var listener = app.listen(4000,process.env.IP,function(){
+//var listener = app.listen(process.env.PORT,process.env.IP,function(){
+var listener = app.listen(4000,process.env.IP,function(){
     //var listener = app.listen(process.env.PORT,process.env.IP,function(){
     console.log("server has started");
     console.log('Listening on port ' + listener.address().port);

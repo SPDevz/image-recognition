@@ -1,5 +1,5 @@
 {
-  "name": "visualrecognition",
+  "name": "ca2",
   "version": "1.0.0",
   "description": "IBM visual recognition",
   "main": "app.js",
@@ -12,5 +12,17 @@
   "dependencies": {
     "express": "^4.16.4",
     "watson-developer-cloud": "^3.15.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPDevz/image-recognition.git"
+  },
+  "keywords": [
+    "ca2"
+  ],
+  "bugs": {
+    "url": "https://github.com/SPDevz/image-recognition/issues"
+  },
+  "homepage": "https://github.com/SPDevz/image-recognition#readme"
 }
